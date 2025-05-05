@@ -24,11 +24,13 @@ int main() {
     cudaMalloc(&d_B, size);
     cudaMalloc(&d_C, size);
 
+    //for transforming cpu to gpu (data)
     cudaMemcpy(d_A, A, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_B, B, size, cudaMemcpyHostToDevice);
 
-    dim3 threads(16, 16);
-    dim3 blocks((N+15)/16, (N+15)/16);
+   
+    dim3 blocks(N,N);
+    dim3 threads(1,1);
     matMul<<<blocks, threads>>>(d_A, d_B, d_C, N);
 
     cudaMemcpy(C, d_C, size, cudaMemcpyDeviceToHost);

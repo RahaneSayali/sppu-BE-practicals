@@ -17,10 +17,12 @@ int main() {
     float C[5];
 
     float *d_A, *d_B, *d_C;
+    // Allocate memory on the device
     cudaMalloc(&d_A, size);
     cudaMalloc(&d_B, size);
     cudaMalloc(&d_C, size);
 
+    //for transforming cpu to gpu (data)
     cudaMemcpy(d_A, A, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_B, B, size, cudaMemcpyHostToDevice);
 
